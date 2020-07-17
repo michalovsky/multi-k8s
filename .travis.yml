@@ -1,0 +1,22 @@
+sudo: required
+services:
+    -docker
+
+before_install:
+    - docker build -t michalovsky/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run -e CI=true michavlovsky/react-test npm test
+
+after_success:
+    - docker build -t michalovsky/multi-client ./client
+    - docker build -t michalovsky/multi-nginx ./nginx
+    - docker build -t michalovsky/multi-server ./server
+    - docker build -t michalovsky/multi-worker ./worker
+    # Log in to the docker CLI
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+    # Take those images and push them into dockerhub
+    - docker push michalovsky/multi-client
+    - docker push michalovsky/multi-nginx
+    - docker push michalovsky/multi-server
+    - docker push michalovsky/multi-worker
