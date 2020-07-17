@@ -6,7 +6,7 @@ before_install:
     - docker build -t michalovsky/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run -e CI=true michavlovsky/react-test npm test
+    - docker run -e CI=true michalovsky/react-test npm test
 
 after_success:
     - docker build -t michalovsky/multi-client ./client
