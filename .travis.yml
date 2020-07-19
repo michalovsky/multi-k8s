@@ -18,7 +18,7 @@ before_install:
     - docker build -t michalovsky/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run -e CI=true michalovsky/docker-react npm run test
+    - docker run -e CI=true michalovsky/react-test npm run test
 
 deploy:
     provider: script
