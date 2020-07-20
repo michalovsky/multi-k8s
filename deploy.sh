@@ -6,9 +6,9 @@ docker push michalovsky/multi-client:latest
 docker push michalovsky/multi-server:latest
 docker push michalovsky/multi-worker:latest
 
-docker push michalovsky/michalovsky/multi-client:$SHA
-docker push michalovsky/michalovsky/multi-server:$SHA
-docker push michalovsky/michalovsky/multi-worker:$SHA
+docker push michalovsky/multi-client:$SHA
+docker push michalovsky/multi-server:$SHA
+docker push michalovsky/multi-worker:$SHA
 
 kubectl apply -f k8s
 kubectl set image deployments/client-deployment client=michalovsky/multi-client:$SHA
